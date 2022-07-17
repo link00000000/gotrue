@@ -33,11 +33,14 @@ vet: # Vet the code
 	go vet $(CHECK_FILES)
 
 dev: ## Run the development containers
-	docker-compose -f $(DEV_DOCKER_COMPOSE) up
+	docker-compose -f $(DEV_DOCKER_COMPOSE) up -d
 
 down: ## Shutdown the development containers
 	# Start postgres first and apply migrations
 	docker-compose -f $(DEV_DOCKER_COMPOSE) down
+
+logs: ## Follow logs of containers
+	docker-compose -f $(DEV_DOCKER_COMPOSE) logs -f
 
 docker-test: ## Run the tests using the development containers
 	docker-compose -f $(DEV_DOCKER_COMPOSE) up -d postgres
@@ -53,6 +56,7 @@ docker-build: ## Force a full rebuild of the development containers
 
 docker-clean: ## Remove the development containers and volumes
 	docker-compose -f $(DEV_DOCKER_COMPOSE) rm -fsv
+	docker volume rm gotrue_postgres_data
 
 format:
 	gofmt -s -w .

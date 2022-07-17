@@ -1,0 +1,17 @@
+---
+###############################################################
+#                         Users Database                      #
+###############################################################
+
+# This file can be used if you do not have an LDAP set up.
+
+# List of users
+users:
+  logan:
+    displayname: "Logan"
+    password: "$argon2id$v=19$m=65536,t=3,p=4$dklpdW1HQU52cVpoekFLbg$+DyFGFhhUYLlMgSt1WLksxD8ZSiQlX5N9dwBnc10C0g"
+    email: logan@localhost
+    groups:
+      - admins
+      - dev
+...
